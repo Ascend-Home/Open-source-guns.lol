@@ -85,7 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const startText = document.getElementById('start-text');
   const profileName = document.getElementById('profile-name');
   const profileBio = document.getElementById('profile-bio');
-  const visitorCount = document.getElementById('visitor-count');
   const backgroundMusic = document.getElementById('background-music');
   const hackerMusic = document.getElementById('hacker-music');
   const rainMusic = document.getElementById('rain-music');
@@ -175,27 +174,6 @@ document.addEventListener('DOMContentLoaded', () => {
     startCursorVisible = !startCursorVisible;
     startText.textContent = startTextContent + (startCursorVisible ? '|' : ' ');
   }, 500);
-
-  function initializeVisitorCounter() {
-    let totalVisitors = localStorage.getItem('totalVisitorCount');
-    if (!totalVisitors) {
-      totalVisitors = 182309;
-      localStorage.setItem('totalVisitorCount', totalVisitors);
-    } else {
-      totalVisitors = parseInt(totalVisitors);
-    }
-
-    const hasVisited = localStorage.getItem('hasVisited');
-    if (!hasVisited) {
-      totalVisitors++;
-      localStorage.setItem('totalVisitorCount', totalVisitors);
-      localStorage.setItem('hasVisited', 'true');
-    }
-
-    visitorCount.textContent = totalVisitors.toLocaleString();
-  }
-
-  initializeVisitorCounter();
 
 // Updated start screen click handler
 startScreen.addEventListener('click', async () => {
@@ -389,7 +367,6 @@ startScreen.addEventListener('click', async () => {
       profilePicture.style.opacity = '1';
       profileName.style.opacity = '1';
       profileBio.style.opacity = '1';
-      visitorCount.style.opacity = '1';
     } else {
       profileBlock.style.background = `rgba(0, 0, 0, ${opacity})`;
       profileBlock.style.borderOpacity = opacity;
@@ -412,7 +389,6 @@ startScreen.addEventListener('click', async () => {
       profilePicture.style.opacity = '1';
       profileName.style.opacity = '1';
       profileBio.style.opacity = '1';
-      visitorCount.style.opacity = '1';
     }
   });
 
