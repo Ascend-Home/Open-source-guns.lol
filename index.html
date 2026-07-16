@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snow</title>
+    <title>Singularity</title>
     <style>
         * {
             margin: 0;
@@ -17,7 +17,7 @@
             position: fixed;
             width: 40px;
             height: 40px;
-            background: url('custom_cursor.png') no-repeat center center;
+            background: url('assets/custom_cursor.svg') no-repeat center center;
             background-size: contain;
             pointer-events: none;
             z-index: 9999;
@@ -69,9 +69,34 @@
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
             z-index: 1;
             pointer-events: none;
+            background-color: #05000a;
+            background-image:
+                radial-gradient(ellipse at 50% 40%, rgba(168, 85, 247, 0.22) 0%, rgba(5, 0, 10, 0) 60%),
+                linear-gradient(var(--primary-color, #a855f7) 1px, transparent 1px),
+                linear-gradient(90deg, var(--primary-color, #a855f7) 1px, transparent 1px);
+            background-size: 100% 100%, 48px 48px, 48px 48px;
+            background-position: 0 0, 0 0, 0 0;
+            opacity: 0.9;
+            animation: grid-drift 16s linear infinite;
+            transition: background-image 0.6s ease;
+        }
+
+        #background::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(5,0,10,0) 0%, rgba(5,0,10,0.85) 85%);
+            pointer-events: none;
+        }
+
+        @keyframes grid-drift {
+            0% { background-position: 0 0, 0 0, 0 0; }
+            100% { background-position: 0 0, 48px 48px, 48px 48px; }
         }
 
         .glitch-overlay {
@@ -648,11 +673,17 @@
         }
         @keyframes titleGlitch {
             0% { content: ""; }
-            20% { content: "s"; }
-            40% { content: "sn"; }
-            60% { content: "sno"; }
-            80% { content: "snow"; }
-            100% { content: "snow"; }
+            9% { content: "S"; }
+            18% { content: "Si"; }
+            27% { content: "Sin"; }
+            36% { content: "Sing"; }
+            45% { content: "Singu"; }
+            54% { content: "Singul"; }
+            63% { content: "Singula"; }
+            72% { content: "Singular"; }
+            81% { content: "Singularit"; }
+            90% { content: "Singularity"; }
+            100% { content: "Singularity"; }
         }
 
         @keyframes titleCursor {
@@ -895,9 +926,7 @@
 
     <div class="container">
         
-        <video id="background" autoplay loop muted playsinline webkit-playsinline>
-            <source src="background.mp4" type="video/mp4">
-        </video>
+        <div id="background"></div>
 
         
         <div class="glitch-overlay"></div>
@@ -912,49 +941,49 @@
         <div id="profile-block">
             <div class="profile-header">
                 <div class="profile-container">
-                    <img src="profile.gif" alt="Profile" class="profile-picture">
+                    <img src="assets/profile.svg" alt="Profile" class="profile-picture">
                 </div>
                 <div class="profile-info">
                     <div class="name-and-badges">
-                        <div id="profile-name">Snow</div>
+                        <div id="profile-name">Singularity</div>
                         
                         <div class="badge-box">
                             <div class="badge-box-inner">
                                 <div class="badge-group">
                                     <div class="badge-container">
-                                        <img src="staff.gif" alt="Staff" class="badge">
+                                        <img src="assets/staff.svg" alt="Staff" class="badge">
                                         <span class="tooltip">Staff Member</span>
                                     </div>
                                     <div class="badge-container">
-                                        <img src=" owner.gif" alt="Owner" class="badge">
+                                        <img src="assets/owner.svg" alt="Owner" class="badge">
                                         <span class="tooltip">Owner</span>
                                     </div>
                                     <div class="badge-container">
-                                        <img src=" partner.gif" alt="Partner" class="badge">
+                                        <img src="assets/partner.svg" alt="Partner" class="badge">
                                         <span class="tooltip">Partner</span>
                                     </div>
                                     <div class="badge-container">
-                                        <img src=" developer.png" alt="Developer" class="badge">
+                                        <img src="assets/developer.svg" alt="Developer" class="badge">
                                         <span class="tooltip">Developer</span>
                                     </div>
                                     <div class="badge-container">
-                                        <img src=" bug_bounty.gif" alt="Bug Bounty" class="badge">
+                                        <img src="assets/bug_bounty.svg" alt="Bug Bounty" class="badge">
                                         <span class="tooltip">Bug Bounty</span>
                                     </div>
                                     <div class="badge-container">
-                                        <img src=" hated_guns.gif" alt="Hated by Guns.lol" class="badge">
-                                        <span class="tooltip">Hated by Guns.lol</span>
+                                        <img src="assets/og.svg" alt="OG" class="badge">
+                                        <span class="tooltip">OG</span>
                                     </div>
                                     <div class="badge-container">
-                                        <img src=" hated_fakecrime.gif" alt="Hated by Fakecrime.bio" class="badge">
-                                        <span class="tooltip">Hated by Fakecrime.bio</span>
+                                        <img src="assets/founder.svg" alt="Founder" class="badge">
+                                        <span class="tooltip">Founder</span>
                                     </div>
                                     <div class="badge-container">
-                                        <img src=" verified.gif" alt="Verified" class="badge">
+                                        <img src="assets/verified.svg" alt="Verified" class="badge">
                                         <span class="tooltip">Verified</span>
                                     </div>
                                     <div class="badge-container">
-                                        <img src=" rule_maker.gif" alt="Rule Maker" class="badge">
+                                        <img src="assets/rule_maker.svg" alt="Rule Maker" class="badge">
                                         <span class="tooltip">Rule Maker</span>
                                     </div>
                                 </div>
@@ -974,18 +1003,19 @@
 
                 <div class="social-links">
                     
-                    <a href="https://github.com/xj3j" target="_blank">
-                        <img src="github.png" alt="GitHub" class="social-icon">
+                    <!-- TODO: replace href="#" below with your real profile links -->
+                    <a href="#" target="_blank">
+                        <img src="assets/github.svg" alt="GitHub" class="social-icon">
                     </a>
                     
-                    <a href="https://www.tiktok.com/@snow_leesan" target="_blank">
-                        <img src="tiktok.png" alt="TikTok" class="social-icon">
+                    <a href="#" target="_blank">
+                        <img src="assets/tiktok.svg" alt="TikTok" class="social-icon">
                     </a>
-                    <a href="https://soundcloud.com/hen-87926753" target="_blank">
-                        <img src="soundcloud.png" alt="TikTok" class="social-icon">
+                    <a href="#" target="_blank">
+                        <img src="assets/soundcloud.svg" alt="SoundCloud" class="social-icon">
                     </a>
-                    <a href="https://namemc.com/profile/Ekil.9" target="_blank">
-                        <img src="namemc.png" alt="TikTok" class="social-icon">
+                    <a href="#" target="_blank">
+                        <img src="assets/namemc.svg" alt="NameMC" class="social-icon">
                     </a>
                 </div>
 
@@ -1006,7 +1036,7 @@
             <h2 class="skills-title">Programming Skills</h2>
             <div class="skill">
                 <div class="skill-name">
-                    <img src="python.png" alt="Python" class="skill-icon">
+                    <img src="assets/python.svg" alt="Python" class="skill-icon">
                     <span>Python</span>
                     <span>67%</span>
                 </div>
@@ -1016,7 +1046,7 @@
             </div>
             <div class="skill">
                 <div class="skill-name">
-                    <img src="html.png" alt="C++" class="skill-icon">
+                    <img src="assets/html.svg" alt="C++" class="skill-icon">
                     <span>html</span>
                     <span>45%</span>
                 </div>
@@ -1026,7 +1056,7 @@
             </div>
             <div class="skill">
                 <div class="skill-name">
-                    <img src="golang.png" alt="C#" class="skill-icon">
+                    <img src="assets/golang.svg" alt="C#" class="skill-icon">
                     <span>Go</span>
                     <span>30%</span>
                 </div>
