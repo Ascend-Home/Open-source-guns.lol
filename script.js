@@ -3,9 +3,8 @@ let hasUserInteracted = false;
 function initMedia() {
   console.log("initMedia called");
   const backgroundMusic = document.getElementById('background-music');
-  const backgroundVideo = document.getElementById('background');
-  
-  if (!backgroundMusic || !backgroundVideo) {
+
+  if (!backgroundMusic) {
     console.error("Media elements not found");
     return;
   }
@@ -13,35 +12,15 @@ function initMedia() {
   // Set initial volume and mute state
   backgroundMusic.volume = 0.3;
   backgroundMusic.muted = true; // Start muted
-  backgroundVideo.muted = true; // Video muted to ensure autoplay works
-
-  // Preload both media elements
   backgroundMusic.load();
-  backgroundVideo.load();
 
-  // Create promises for synchronized playback
-  const playPromises = [];
-  
-  // Start video playback (muted is allowed by browsers)
-  playPromises.push(backgroundVideo.play().catch(err => {
-    console.error("Failed to play background video:", err);
-  }));
-
-  // Start audio playback (muted)
-  playPromises.push(backgroundMusic.play().catch(err => {
+  backgroundMusic.play().catch(err => {
     console.error("Failed to play background music:", err);
-  }));
-
-  // Synchronize playback
-  Promise.all(playPromises).then(() => {
-    console.log("Media playback synchronized");
-  }).catch(err => {
-    console.error("Media playback failed:", err);
   });
 }
 
 function animateTitle() {
-    const title = "Snow";
+    const title = "Singularity";
     let currentTitle = "";
     let index = 0;
     let isDeleting = false;
@@ -122,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const volumeIcon = document.getElementById('volume-icon');
   const volumeSlider = document.getElementById('volume-slider');
   const transparencySlider = document.getElementById('transparency-slider');
-  const backgroundVideo = document.getElementById('background');
+  const backgroundGrid = document.getElementById('background');
   const hackerOverlay = document.getElementById('hacker-overlay');
   const snowOverlay = document.getElementById('snow-overlay');
   const glitchOverlay = document.querySelector('.glitch-overlay');
@@ -228,11 +207,6 @@ startScreen.addEventListener('click', async () => {
     if (backgroundMusic.paused) {
       await backgroundMusic.play();
     }
-    
-    // Ensure video is playing (should already be playing)
-    if (backgroundVideo.paused) {
-      await backgroundVideo.play();
-    }
   } catch (err) {
     console.error("Failed to play media:", err);
   }
@@ -293,7 +267,7 @@ startScreen.addEventListener('click', async () => {
     typeWriterBio();
   });
 
-  const name = "snow";
+  const name = "Singularity";
   let nameText = '';
   let nameIndex = 0;
   let isNameDeleting = false;
@@ -327,8 +301,7 @@ startScreen.addEventListener('click', async () => {
   }, 500);
 
   const bioMessages = [
-    "Fu*k Guns.lol & Fakecrime.bio ",
-    "\"Hello this is snow\""
+    "Owner of the Ubg site Singularity"
   ];
   let bioText = '';
   let bioIndex = 0;
@@ -466,12 +439,13 @@ startScreen.addEventListener('click', async () => {
     }
     document.documentElement.style.setProperty('--primary-color', primaryColor);
 
-    gsap.to(backgroundVideo, {
+    gsap.to(backgroundGrid, {
       opacity: 0,
       duration: 0.5,
       ease: 'power2.in',
       onComplete: () => {
-        backgroundVideo.src = videoSrc;
+        // Background is a CSS grid that recolors via --primary-color (set above),
+        // so there's no video file to load here.
 
         if (currentAudio) {
           currentAudio.pause();
@@ -503,8 +477,8 @@ startScreen.addEventListener('click', async () => {
           gsap.to(profileBlock, { x: 0, opacity: 1, duration: 0.5, ease: 'power2.out' });
         }
 
-        gsap.to(backgroundVideo, {
-          opacity: 1,
+        gsap.to(backgroundGrid, {
+          opacity: 0.9,
           duration: 0.5,
           ease: 'power2.out',
           onComplete: () => {
@@ -751,7 +725,7 @@ startScreen.addEventListener('click', async () => {
 
   async function fetchDiscordActivity() {
     try {
-      const res = await fetch(`https://api.lanyard.rest/v1/users/1255568617823670282`);
+      const res = await fetch(`https://api.lanyard.rest/v1/users/1485788898008367244`);
       
       if (!res.ok) {
         throw new Error(`API request failed with status ${res.status}`);
@@ -764,7 +738,7 @@ startScreen.addEventListener('click', async () => {
         if (data.error?.code === "user_not_monitored") {
           element.textContent = "Join Lanyard server to show status";
           element.style.cursor = "pointer";
-          element.onclick = () => window.open("https://discord.gg/PQW4JFuWrR", "_blank");
+          element.onclick = () => window.open("https://discord.com/invite/lanyard", "_blank");
           return;
         }
         element.textContent = "Status unavailable";
